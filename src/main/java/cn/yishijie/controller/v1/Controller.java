@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author chenjianhui on 2020/01/16
  */
@@ -34,7 +37,9 @@ public class Controller {
 
     @RequestMapping(value = "/news/add",method = RequestMethod.POST)
     public ResponseEntity<?>  createdNews(@RequestBody NewsReq newsReq, @RequestHeader HttpHeaders headers){
-        newsService.addNews(new NewsReqDto(newsReq));
-        return new ResponseEntity<>(null,HttpStatus.OK);
+        long newsPk = newsService.addNews(new NewsReqDto(newsReq));
+        Map<String,String>  result = new HashMap<>();
+        result.put("newsPk",String.valueOf(newsPk));
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
 }

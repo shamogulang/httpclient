@@ -10,5 +10,5 @@ public interface NewsService {
 
      NewsRespDto getNewsDetail(long newsPk);
 
-     void addNews(NewsReqDto newsReqDto);
+     long addNews(NewsReqDto newsReqDto);
 }

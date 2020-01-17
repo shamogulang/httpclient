@@ -66,12 +66,12 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void addNews(NewsReqDto newsReqDto) {
+    public long addNews(NewsReqDto newsReqDto) {
+        long generateNewsPk = 0L;
         if(null == contentMap){
-            return ;
+            return 0L;
         }
-
-        long generateNewsPk = newsPk.get();
+        generateNewsPk = newsPk.get();
         NewsEntity newsEntity = new NewsEntity(newsReqDto,generateNewsPk);
         try {
             contentMap.put(String.valueOf(generateNewsPk),objectMapper.writeValueAsString(newsEntity));
@@ -80,5 +80,6 @@ public class NewsServiceImpl implements NewsService {
         }catch (Exception e){
             ;
         }
+        return generateNewsPk;
     }
 }
